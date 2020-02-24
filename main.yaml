@@ -1,47 +1,4 @@
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: polkadot
-  labels:
-    volume: polkadot
-spec:
-  persistentVolumeReclaimPolicy: Retain
-  accessModes:
-  - ReadWriteMany
-  capacity:
-    storage: 5Gi
-  hostPath:
-    path: "/polkadot/data"
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - master
-  tolerations:
-  - key: "node-role.kubernetes.io/master"
-    operator: Equal
-    effect: "NoSchedule"
-...
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: polkadot
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  selector:
-    matchLabels:
-      volume: polkadot
-...
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -66,12 +23,13 @@ spec:
         - containerPort: 30333
         - containerPort: 9933
         volumeMounts:
-        - mountPath: "/data"
-          name: polkadot
+        - mountPath: /polkadot/.local/share/polkadot
+          name: polkadot-chain
       volumes:
-      - name: polkadot
-        persistentVolumeClaim:
-          claimName: polkadot
+      - name: polkadot-chain
+        hostPath:
+          path: /usr/local/src
+          type: Directory
 ...
 ---
 apiVersion: v1
