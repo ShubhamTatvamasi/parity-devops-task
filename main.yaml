@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: polkadot
+  labels:
+    volume: polkadot
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: "/polkadot/data"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - master
+  tolerations:
+  - key: "node-role.kubernetes.io/master"
+    operator: Equal
+    effect: "NoSchedule"
+...
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: polkadot
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      volume: polkadot
+...
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: polkadot
+  name: polkadot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: polkadot
+  template:
+    metadata:
+      labels:
+        run: polkadot
+    spec:
+      containers:
+      - image: parity/polkadot
+        name: polkadot
+        args: ["--chain", "westend"]
+        ports:
+        - containerPort: 30333
+        - containerPort: 9933
+        volumeMounts:
+        - mountPath: "/data"
+          name: polkadot
+      volumes:
+      - name: polkadot
+        persistentVolumeClaim:
+          claimName: polkadot
+...
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polkadot
+spec:
+  selector:
+    run: polkadot
+  type: NodePort
+  ports:
+  - name: port1
+    port: 30333
+    protocol: TCP
+    targetPort: 30333
+    nodePort: 30333
+  - name: port2
+    port: 9933
+    protocol: TCP
+    targetPort: 9933
+    nodePort: 30933
+...
