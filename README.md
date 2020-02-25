@@ -2,9 +2,14 @@
 
 ### Ingress
 
-Download and Install: Ingress controller
+Download Ingress chart
 ```bash
 helm fetch --untar stable/nginx-ingress
+```
+> this part is already done and code in added on the repo
+
+Install: Ingress controller
+```bash
 helm install ingress ./nginx-ingress --values ./nginx-ingress/myvalues.yaml
 ```
 
@@ -46,9 +51,14 @@ kubectl apply -f pv.yaml
 ```
 > this also includes PersistentVolume for grafana
 
-Download and Install: Prometheus
+Download Prometheus chart
 ```bash
 helm fetch --untar stable/prometheus
+```
+> this part is already done and code in added on the repo
+
+Install: Prometheus
+```bash
 helm install prometheus ./prometheus --values ./prometheus/myvalues.yaml
 ```
 
@@ -86,9 +96,15 @@ Kubernetes | 8588
 Node Exporter for Prometheus | 11074
 Polkadot metrics | 11171
 
-Download and Install: Grafana
+
+Download Grafana chart
 ```bash
 helm fetch --untar stable/grafana
+```
+> this part is already done and code in added on the repo
+
+Install: Grafana
+```bash
 helm install grafana ./grafana --values ./grafana/myvalues.yaml
 ```
 
