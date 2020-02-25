@@ -96,7 +96,6 @@ Kubernetes | 8588
 Node Exporter for Prometheus | 11074
 Polkadot metrics | 11171
 
-
 Download Grafana chart
 ```bash
 helm fetch --untar stable/grafana
@@ -121,38 +120,12 @@ helm uninstall grafana
 
 ### polkadot
 
+Deploy polkadot node
+```bash
+kubectl apply -f polkadot.yaml
+```
 
-docker run --rm -it chevdor/polkadot:latest polkadot --version
-
-parity/polkadot
-
-https://polkascan.io/pre/westend
-
-docker run -d -p 30333:30333 -p 9933:9933 -v $PWD/data:/data chevdor/polkadot polkadot --chain westend
-
-
-docker run --rm parity/polkadot --help
-
-docker run --rm parity/polkadot --version
-
-docker run --rm parity/polkadot --light --alice
-
-/polkadot/.local/share/polkadot
-
-curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-
-helm repo update
-
-helm install prometheus stable/prometheus
-
-helm install stable/prometheus
-
-helm fetch --untar stable/prometheus
-
-helm install prometheus stable/prometheus --values myvalues.yaml .
-
-parity.shubhamtatvamasi.com:30080
-
-
+Delete polkadot node
+```bash
+kubectl delete -f polkadot.yaml
+```

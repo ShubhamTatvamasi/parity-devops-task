@@ -2,26 +2,28 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: polkadot-pv
+  name: polkadot
 spec:
+  storageClassName: manual
   accessModes:
   - ReadWriteMany
   capacity:
-    storage: 5Gi
+    storage: 10Gi
   hostPath:
-    path: "/polkadot"
+    path: "/data/polkadot"
 ...
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: polkadot-pvc
+  name: polkadot
 spec:
+  storageClassName: manual
   accessModes:
   - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ...
 ---
 apiVersion: apps/v1
@@ -50,12 +52,12 @@ spec:
         - containerPort: 30333
         - containerPort: 9933
         volumeMounts:
-        - mountPath: "/polkadot/.local/share/polkadot"
-          name: polkadot-chain
+        - mountPath: "/root/.local/share/polkadot"
+          name: polkadot
       volumes:
-      - name: polkadot-chain
+      - name: polkadot
         persistentVolumeClaim:
-          claimName: polkadot-pvc
+          claimName: polkadot
 ...
 ---
 apiVersion: v1
@@ -65,16 +67,13 @@ metadata:
 spec:
   selector:
     run: polkadot
-  type: NodePort
   ports:
   - name: port1
     port: 30333
     protocol: TCP
     targetPort: 30333
-    nodePort: 30333
   - name: port2
     port: 9933
     protocol: TCP
     targetPort: 9933
-    nodePort: 30933
 ...
