@@ -35,6 +35,8 @@ kubectl delete secret shubhamtatvamasi-tls
 
 ### prometheus
 
+https://alertmanager.shubhamtatvamasi.com:32443
+https://pushgateway.shubhamtatvamasi.com:32443
 https://prometheus.shubhamtatvamasi.com:32443
 
 Create Persistent Volume for prometheus
@@ -52,6 +54,12 @@ Check the changes done as compared to original values
 ```bash
 diff ./prometheus/values.yaml ./prometheus/myvalues.yaml
 ```
+
+Delete Prometheus 
+```bash
+helm uninstall prometheus
+```
+
 ---
 
 ### grafana

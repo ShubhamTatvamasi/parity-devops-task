@@ -4,12 +4,27 @@ kind: PersistentVolume
 metadata:
   name: prometheus-alertmanager
 spec:
+  storageClassName: manual
   accessModes:
   - ReadWriteOnce
   capacity:
     storage: 2Gi
   hostPath:
-    path: "/pv/prometheus-alertmanager/"
+    path: "/data"
+...
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pushgateway
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: "/data"
 ...
 ---
 apiVersion: v1
@@ -17,10 +32,11 @@ kind: PersistentVolume
 metadata:
   name: prometheus-server
 spec:
+  storageClassName: manual
   accessModes:
   - ReadWriteOnce
   capacity:
     storage: 8Gi
   hostPath:
-    path: "/pv/prometheus-server/"
+    path: "/data"
 ...
