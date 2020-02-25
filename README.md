@@ -1,21 +1,20 @@
 # parity-devops-task
 
-### Ingress
+### Download helm charts
 
-Download Ingress chart
 ```bash
 helm fetch --untar stable/nginx-ingress
+helm fetch --untar stable/prometheus
+helm fetch --untar stable/grafana
 ```
 > this part is already done and code is added on this repo
+---
+
+### Ingress
 
 Install: Ingress controller
 ```bash
 helm install ingress ./nginx-ingress --values ./nginx-ingress/myvalues.yaml
-```
-
-Check the changes done as compared to original values
-```bash
-diff ./nginx-ingress/values.yaml ./nginx-ingress/myvalues.yaml
 ```
 
 Add TLS certificate as secret for Ingress
@@ -24,16 +23,10 @@ kubectl create secret tls shubhamtatvamasi-tls \
   --key ./shubhamtatvamasi.com.key \
   --cert ./fullchain.cer
 ```
-> letsencrypt certificate used for this
 
-Delete Ingress controller
+Check the changes done as compared to original values
 ```bash
-helm uninstall ingress
-```
-
-Delete TLS Certificate
-```bash
-kubectl delete secret shubhamtatvamasi-tls
+diff ./nginx-ingress/values.yaml ./nginx-ingress/myvalues.yaml
 ```
 ---
 
@@ -51,12 +44,6 @@ kubectl apply -f pv.yaml
 ```
 > this also includes PersistentVolume for grafana
 
-Download Prometheus chart
-```bash
-helm fetch --untar stable/prometheus
-```
-> this part is already done and code is added on this repo
-
 Install: Prometheus
 ```bash
 helm install prometheus ./prometheus --values ./prometheus/myvalues.yaml
@@ -65,11 +52,6 @@ helm install prometheus ./prometheus --values ./prometheus/myvalues.yaml
 Check the changes done as compared to original values
 ```bash
 diff ./prometheus/values.yaml ./prometheus/myvalues.yaml
-```
-
-Delete Prometheus 
-```bash
-helm uninstall prometheus
 ```
 ---
 
@@ -97,12 +79,6 @@ Dashboard | ID
 Kubernetes Deployment | 8588
 Node Exporter for Prometheus | 11074
 
-Download Grafana chart
-```bash
-helm fetch --untar stable/grafana
-```
-> this part is already done and code is added on this repo
-
 Install: Grafana
 ```bash
 helm install grafana ./grafana --values ./grafana/myvalues.yaml
@@ -112,11 +88,6 @@ Check the changes done as compared to original values
 ```bash
 diff ./grafana/values.yaml ./grafana/myvalues.yaml
 ```
-
-Delete Grafana 
-```bash
-helm uninstall grafana
-```
 ---
 
 ### polkadot
@@ -125,8 +96,15 @@ Deploy polkadot node
 ```bash
 kubectl apply -f polkadot.yaml
 ```
+---
 
-Delete polkadot node
+### Deleting Everything
+
 ```bash
+helm uninstall ingress
+helm uninstall prometheus
+helm uninstall grafana
+kubectl delete secret shubhamtatvamasi-tls
+kubectl delete -f pv.yaml
 kubectl delete -f polkadot.yaml
 ```
