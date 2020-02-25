@@ -35,14 +35,17 @@ kubectl delete secret shubhamtatvamasi-tls
 
 ### prometheus
 
-https://alertmanager.shubhamtatvamasi.com:32443
-https://pushgateway.shubhamtatvamasi.com:32443
-https://prometheus.shubhamtatvamasi.com:32443
+GUI | URL
+--- | --- 
+Alert Manager | https://alertmanager.shubhamtatvamasi.com:32443
+Push Gateway | https://pushgateway.shubhamtatvamasi.com:32443
+Prometheus | https://prometheus.shubhamtatvamasi.com:32443
 
 Create Persistent Volume for prometheus
 ```bash
 kubectl apply -f pv.yaml
 ```
+> this also includes PersistentVolume for grafana
 
 Download and Install: Prometheus
 ```bash
@@ -59,7 +62,6 @@ Delete Prometheus
 ```bash
 helm uninstall prometheus
 ```
-
 ---
 
 ### grafana
@@ -72,6 +74,18 @@ ID: admin
 Pass: strongpassword
 ```
 
+Add prometheus datasource
+```
+http://prometheus-server
+```
+
+Dashboard | ID
+--- | --- 
+Kubernetes | 8588
+Node Exporter for Prometheus | 11074
+Polkadot metrics | 11171
+
+
 ```bash
 helm fetch --untar stable/grafana
 helm install grafana ./grafana --values ./grafana/myvalues.yaml
@@ -82,11 +96,11 @@ Check the changes done as compared to original values
 diff ./grafana/values.yaml ./grafana/myvalues.yaml
 ```
 
-Add prometheus datasource
+Delete Grafana 
+```bash
+helm uninstall grafana
 ```
-http://prometheus-server
-```
-
+---
 
 ### polkadot
 

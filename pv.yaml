@@ -40,3 +40,17 @@ spec:
   hostPath:
     path: "/data"
 ...
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: "/data/grafana"
+...
