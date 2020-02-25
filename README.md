@@ -37,6 +37,11 @@ kubectl delete secret shubhamtatvamasi-tls
 
 https://prometheus.shubhamtatvamasi.com:32443
 
+Create Persistent Volume for prometheus
+```bash
+kubectl apply -f pv.yaml
+```
+
 Download and Install: Prometheus
 ```bash
 helm fetch --untar stable/prometheus
@@ -47,14 +52,31 @@ Check the changes done as compared to original values
 ```bash
 diff ./prometheus/values.yaml ./prometheus/myvalues.yaml
 ```
-
 ---
 
 ### grafana
 
+https://grafana.shubhamtatvamasi.com:32443
+
+Login credentials for grafana
+```
+ID: admin
+Pass: strongpassword
+```
+
 ```bash
 helm fetch --untar stable/grafana
-helm install grafana ./grafana
+helm install grafana ./grafana --values ./grafana/myvalues.yaml
+```
+
+Check the changes done as compared to original values
+```bash
+diff ./grafana/values.yaml ./grafana/myvalues.yaml
+```
+
+Add prometheus datasource
+```
+http://prometheus-server
 ```
 
 

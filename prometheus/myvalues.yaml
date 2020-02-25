@@ -92,13 +92,13 @@ alertmanager:
   ingress:
     ## If true, alertmanager Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## alertmanager Ingress annotations
     ##
-    annotations: {}
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: 'true'
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: 'true'
 
     ## alertmanager Ingress additional labels
     ##
@@ -107,8 +107,8 @@ alertmanager:
     ## alertmanager Ingress hostnames with optional path
     ## Must be provided if Ingress is enabled
     ##
-    hosts: []
-    #   - alertmanager.domain.com
+    hosts:
+      - prometheus.shubhamtatvamasi.com
     #   - domain.com/alertmanager
 
     ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
@@ -121,10 +121,10 @@ alertmanager:
     ## alertmanager Ingress TLS configuration
     ## Secrets must be manually created in the namespace
     ##
-    tls: []
-    #   - secretName: prometheus-alerts-tls
-    #     hosts:
-    #       - alertmanager.domain.com
+    tls:
+      - secretName: shubhamtatvamasi-tls
+        hosts:
+          - prometheus.shubhamtatvamasi.com
 
   ## Alertmanager Deployment Strategy type
   # strategy:
