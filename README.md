@@ -1,6 +1,5 @@
 # parity-devops-task
 
-
 ### Ingress
 
 Download and Install: Ingress controller
@@ -33,7 +32,7 @@ kubectl delete secret shubhamtatvamasi-tls
 ```
 ---
 
-### prometheus
+### Prometheus
 
 GUI | URL
 --- | --- 
@@ -64,9 +63,11 @@ helm uninstall prometheus
 ```
 ---
 
-### grafana
+### Grafana
 
-https://grafana.shubhamtatvamasi.com:32443
+GUI | URL
+--- | --- 
+Grafana | https://grafana.shubhamtatvamasi.com:32443
 
 Login credentials for grafana
 ```
@@ -85,7 +86,7 @@ Kubernetes | 8588
 Node Exporter for Prometheus | 11074
 Polkadot metrics | 11171
 
-
+Download and Install: Grafana
 ```bash
 helm fetch --untar stable/grafana
 helm install grafana ./grafana --values ./grafana/myvalues.yaml
