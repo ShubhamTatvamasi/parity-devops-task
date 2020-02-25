@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: parity.shubhamtatvamasi.com
+    http:
+      paths:
+      - path: /prometheus
+        backend:
+          serviceName: prometheus
+          servicePort: 4200
+      - path: /grafana
+        backend:
+          serviceName: grafana
+          servicePort: 8080

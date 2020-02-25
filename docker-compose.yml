@@ -1,0 +1,15 @@
+version: '3'
+services:
+  polkadot:
+    container_name: polkadot
+    user: root
+    ports:
+      - "30333:30333"
+      - "9933:9933"
+    image: parity/polkadot
+    volumes:
+      - "polkadot-data:/root/.local/share/polkadot/"
+    command: "--chain westend"
+
+volumes:
+  polkadot-data:
