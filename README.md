@@ -35,18 +35,26 @@ kubectl delete secret shubhamtatvamasi-tls
 
 ### prometheus
 
+https://prometheus.shubhamtatvamasi.com:32443
+
+Download and Install: Prometheus
 ```bash
 helm fetch --untar stable/prometheus
-helm install prometheus ./prometheus
-
+helm install prometheus ./prometheus --values ./prometheus/myvalues.yaml
 ```
+
+Check the changes done as compared to original values
+```bash
+diff ./prometheus/values.yaml ./prometheus/myvalues.yaml
+```
+
+---
 
 ### grafana
 
 ```bash
 helm fetch --untar stable/grafana
 helm install grafana ./grafana
-
 ```
 
 

@@ -1,19 +1,22 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: simple-fanout-example
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+  name: nginx
 spec:
+  tls:
+  - secretName: shubhamtatvamasi-tls
+    hosts:
+      - parity.shubhamtatvamasi.com
+      - prometheus.shubhamtatvamasi.com
   rules:
-  - host: parity.shubhamtatvamasi.com
+  - host: prometheus.shubhamtatvamasi.com
     http:
       paths:
-      - path: /prometheus
+      - path: /
         backend:
-          serviceName: prometheus
-          servicePort: 4200
-      - path: /grafana
-        backend:
-          serviceName: grafana
-          servicePort: 8080
+          serviceName: prometheus-alertmanager
+          servicePort: http
+...
