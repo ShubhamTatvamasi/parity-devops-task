@@ -6,7 +6,7 @@ Download Ingress chart
 ```bash
 helm fetch --untar stable/nginx-ingress
 ```
-> this part is already done and code in added on the repo
+> this part is already done and code is added on this repo
 
 Install: Ingress controller
 ```bash
@@ -55,7 +55,7 @@ Download Prometheus chart
 ```bash
 helm fetch --untar stable/prometheus
 ```
-> this part is already done and code in added on the repo
+> this part is already done and code is added on this repo
 
 Install: Prometheus
 ```bash
@@ -101,7 +101,7 @@ Download Grafana chart
 ```bash
 helm fetch --untar stable/grafana
 ```
-> this part is already done and code in added on the repo
+> this part is already done and code is added on this repo
 
 Install: Grafana
 ```bash
