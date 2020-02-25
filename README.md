@@ -94,7 +94,7 @@ Two Dashboard Installed as of now
 
 Dashboard | ID
 --- | --- 
-Kubernetes | 8588
+Kubernetes Deployment | 8588
 Node Exporter for Prometheus | 11074
 
 Download Grafana chart
