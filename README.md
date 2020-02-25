@@ -90,11 +90,12 @@ Add prometheus datasource
 http://prometheus-server
 ```
 
+Two Dashboard Installed as of now
+
 Dashboard | ID
 --- | --- 
 Kubernetes | 8588
 Node Exporter for Prometheus | 11074
-Polkadot metrics | 11171
 
 Download Grafana chart
 ```bash
