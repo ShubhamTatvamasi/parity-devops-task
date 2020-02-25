@@ -6,9 +6,9 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   capacity:
-    storage: 10Gi
+    storage: 30Gi
   hostPath:
     path: "/data/polkadot"
 ...
@@ -20,10 +20,10 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 30Gi
 ...
 ---
 apiVersion: apps/v1
