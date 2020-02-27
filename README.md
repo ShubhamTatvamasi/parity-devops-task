@@ -72,12 +72,13 @@ Add prometheus datasource
 http://prometheus-server
 ```
 
-Three Dashboards Installed as of now
+Install Dashboards:
 
 Dashboard | ID
 --- | --- 
 Kubernetes Pods | 6336
 Kubernetes Deployment | 8588
+Node Exporter Full | 1860
 Node Exporter for Prometheus | 11074
 
 Install: Grafana
