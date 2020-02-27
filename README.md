@@ -72,7 +72,7 @@ Add prometheus datasource
 http://prometheus-server
 ```
 
-Three Dashboard Installed as of now
+Three Dashboards Installed as of now
 
 Dashboard | ID
 --- | --- 
