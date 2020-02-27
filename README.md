@@ -76,9 +76,9 @@ Three Dashboard Installed as of now
 
 Dashboard | ID
 --- | --- 
+Kubernetes Pods | 6336
 Kubernetes Deployment | 8588
 Node Exporter for Prometheus | 11074
-Kubernetes Pods | 6336
 
 Install: Grafana
 ```bash
